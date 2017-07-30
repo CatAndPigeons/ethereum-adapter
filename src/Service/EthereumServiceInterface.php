@@ -8,5 +8,5 @@ interface EthereumServiceInterface
 
     public function createAccount(string $password): string;
 
-    public function getEtherBalance(string $address): int;
+    public function getEtherBalance(string $address): float;
 }

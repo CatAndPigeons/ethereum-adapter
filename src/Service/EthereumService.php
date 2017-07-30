@@ -39,8 +39,65 @@ final class EthereumService implements EthereumServiceInterface
         return $this->call('personal_newAccount', [$password]);
     }
 
-    public function getEtherBalance(string $address): int
+    public function getEtherBalance(string $address): float
     {
         return hexdec($this->call('eth_getBalance', [$address, 'latest']))/(10**18);
+    }
+
+    public function getTokenBalance(string $contract, string $address): int
+    {
+        $signature = $this->getFunctionSignature('balanceOf(address)');
+        return hexdec($this->call('eth_call', [[
+            'to' => $contract,
+            'data' => $signature.str_pad(substr($address, 2), 64, '0', STR_PAD_LEFT)
+        ], 'latest']));
+    }
+
+    public function getCoinbase(): string
+    {
+        return $this->call('eth_coinbase');
+    }
+
+    public function sendEther(string $from, string $to, float $value)
+    {
+        $this->unlockAccount($from, 'password');
+
+        return $this->call('eth_sendTransaction', [[
+            'from' => $from,
+            'to' => $to,
+            'value' => '0x'.dechex(number_format($value*(10**18), 0, '.', ''))
+        ]]);
+    }
+
+    public function transferToken(string $contract, string $from, string $to, int $value)
+    {
+        $signature = $this->getFunctionSignature('transfer(address,uint256)');
+        $to = str_pad(substr($to, 2), 64, '0', STR_PAD_LEFT);
+        $value = str_pad(dechex($value), 64, '0', STR_PAD_LEFT);
+
+        $this->unlockAccount($from, 'password');
+
+        return $this->call('eth_sendTransaction', [[
+            'from' => $from,
+            'to' => $contract,
+            'data' => $signature.$to.$value
+        ]]);
+    }
+
+    private function unlockAccount(string $address, string $password, int $duration = 30)
+    {
+        return $this->call('personal_unlockAccount', [$address, $password], $duration);
+    }
+
+    private function getFunctionSignature(string $function): string
+    {
+        $signature = $this->call('web3_sha3', ['0x'.$this->strhex($function)]);
+        return substr($signature, 0, 10);
+    }
+
+    private function strhex(string $string): string
+    {
+        $hexstr = unpack('H*', $string);
+        return array_shift($hexstr);
     }
 }
