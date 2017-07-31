@@ -28,7 +28,7 @@ final class EthereumService implements EthereumServiceInterface
         $rawResponse = json_decode($response->getBody()->getContents(), true);
 
         if (isset($rawResponse['error'])) {
-            throw new EthereumException(sprintf('Ethereum client error %s', $rawResponse['error']['message']));
+            throw new EthereumException(sprintf('Ethereum client error: %s', $rawResponse['error']['message']));
         }
 
         return $rawResponse['result'];
@@ -60,8 +60,6 @@ final class EthereumService implements EthereumServiceInterface
 
     public function sendEther(string $from, string $to, float $value)
     {
-        $this->unlockAccount($from, 'password');
-
         return $this->call('eth_sendTransaction', [[
             'from' => $from,
             'to' => $to,
@@ -75,8 +73,6 @@ final class EthereumService implements EthereumServiceInterface
         $to = str_pad(substr($to, 2), 64, '0', STR_PAD_LEFT);
         $value = str_pad(dechex($value), 64, '0', STR_PAD_LEFT);
 
-        $this->unlockAccount($from, 'password');
-
         return $this->call('eth_sendTransaction', [[
             'from' => $from,
             'to' => $contract,
@@ -84,15 +80,20 @@ final class EthereumService implements EthereumServiceInterface
         ]]);
     }
 
-    private function unlockAccount(string $address, string $password, int $duration = 30)
+    public function unlockAccount(string $address, string $password, int $duration = 30)
     {
         return $this->call('personal_unlockAccount', [$address, $password], $duration);
     }
 
     private function getFunctionSignature(string $function): string
     {
-        $signature = $this->call('web3_sha3', ['0x'.$this->strhex($function)]);
+        $signature = $this->getSha3($function);
         return substr($signature, 0, 10);
+    }
+
+    private function getSha3(string $string): string
+    {
+        return $this->call('web3_sha3', ['0x'.$this->strhex($string)]);
     }
 
     private function strhex(string $string): string
