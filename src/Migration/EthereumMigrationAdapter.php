@@ -71,7 +71,7 @@ final class EthereumMigrationAdapter implements MigrationAdapterInterface
             'toBlock' => 'latest',
             'topics'=> [
                 $this->getSha3('Migration(address,string,uint256)'),
-                '0x'.str_pad(substr($this->getCoinbase(), 2), 64, '0', STR_PAD_LEFT),
+                '0x'.str_pad(substr($this->settings['coinbase'], 2), 64, '0', STR_PAD_LEFT),
                 $this->getSha3($identifier)
             ]
         ]]));
@@ -83,7 +83,7 @@ final class EthereumMigrationAdapter implements MigrationAdapterInterface
         $version = str_pad(dechex($version), 64, '0', STR_PAD_LEFT);
 
         return $this->call('eth_sendTransaction', [[
-            'from' => $this->getCoinbase(),
+            'from' => $this->settings['coinbase'],
             'to' => $address,
             'data' => $signature.$version
         ]]);
@@ -96,11 +96,6 @@ final class EthereumMigrationAdapter implements MigrationAdapterInterface
             'to' => $address,
             'data' => $signature
         ], 'latest']));
-    }
-
-    private function getCoinbase(): string
-    {
-        return $this->call('eth_coinbase');
     }
 
     private function getFunctionSignature(string $function): string
