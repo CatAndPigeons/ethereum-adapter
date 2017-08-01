@@ -67,12 +67,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/daikon-cqrs/data-structure.git",
-                "reference": "723c960d94a21554ca90234da307f1e945531cd4"
+                "reference": "4fdc6b0712ca992217b47f7cc6f8058e1f91caa3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/daikon-cqrs/data-structure/zipball/723c960d94a21554ca90234da307f1e945531cd4",
-                "reference": "723c960d94a21554ca90234da307f1e945531cd4",
+                "url": "https://api.github.com/repos/daikon-cqrs/data-structure/zipball/4fdc6b0712ca992217b47f7cc6f8058e1f91caa3",
+                "reference": "4fdc6b0712ca992217b47f7cc6f8058e1f91caa3",
                 "shasum": ""
             },
             "require": {
@@ -109,7 +109,7 @@
                 "list",
                 "map"
             ],
-            "time": "2017-07-17 14:05:15"
+            "time": "2017-07-23 23:36:51"
         },
         {
             "name": "daikon/dbal",
@@ -117,17 +117,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/daikon-cqrs/dbal.git",
-                "reference": "957b22470c58d889b2a97c109b5c4003e721953b"
+                "reference": "12011f8431de1a4ec5dc7061b2c374c4e424d52d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/daikon-cqrs/dbal/zipball/957b22470c58d889b2a97c109b5c4003e721953b",
-                "reference": "957b22470c58d889b2a97c109b5c4003e721953b",
+                "url": "https://api.github.com/repos/daikon-cqrs/dbal/zipball/12011f8431de1a4ec5dc7061b2c374c4e424d52d",
+                "reference": "12011f8431de1a4ec5dc7061b2c374c4e424d52d",
                 "shasum": ""
             },
             "require": {
                 "beberlei/assert": "^2.7",
                 "daikon/data-structure": "master@dev",
+                "daikon/event-sourcing": "master@dev",
+                "daikon/read-model": "master@dev",
                 "php": ">=7.1"
             },
             "require-dev": {
@@ -152,7 +154,139 @@
                 "dbal",
                 "immutable"
             ],
-            "time": "2017-07-12 16:39:02"
+            "time": "2017-07-24 00:02:50"
+        },
+        {
+            "name": "daikon/event-sourcing",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/daikon-cqrs/event-sourcing.git",
+                "reference": "b05749bec7793050e86d3dc2289a22741eac8d28"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/daikon-cqrs/event-sourcing/zipball/b05749bec7793050e86d3dc2289a22741eac8d28",
+                "reference": "b05749bec7793050e86d3dc2289a22741eac8d28",
+                "shasum": ""
+            },
+            "require": {
+                "beberlei/assert": "^2.7",
+                "daikon/data-structure": "master@dev",
+                "daikon/message-bus": "master@dev",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.2",
+                "satooshi/php-coveralls": "master@dev",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Daikon\\EventSourcing\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MPL-2.0"
+            ],
+            "description": "CQRS and event-sourcing library for PHP7.",
+            "homepage": "https://github.com/daikon-cqrs/sourcing",
+            "keywords": [
+                "cqrs",
+                "event-sourcing",
+                "immutable"
+            ],
+            "time": "2017-07-28 17:14:53"
+        },
+        {
+            "name": "daikon/message-bus",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/daikon-cqrs/message-bus.git",
+                "reference": "c00c8346625798324b7edf729bf2382ef76cb7b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/daikon-cqrs/message-bus/zipball/c00c8346625798324b7edf729bf2382ef76cb7b5",
+                "reference": "c00c8346625798324b7edf729bf2382ef76cb7b5",
+                "shasum": ""
+            },
+            "require": {
+                "daikon/data-structure": "master@dev",
+                "php": ">=7.1",
+                "ramsey/uuid": "^3.6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.2",
+                "satooshi/php-coveralls": "master@dev",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Daikon\\MessageBus\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MPL-2.0"
+            ],
+            "description": "Lightweight message bus for php.",
+            "homepage": "https://github.com/daikon-cqrs/message-bus",
+            "keywords": [
+                "message-bus",
+                "messaging"
+            ],
+            "time": "2017-07-22 22:13:14"
+        },
+        {
+            "name": "daikon/read-model",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/daikon-cqrs/read-model.git",
+                "reference": "72a5c832d7a73038041df0c1ef823896360e059d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/daikon-cqrs/read-model/zipball/72a5c832d7a73038041df0c1ef823896360e059d",
+                "reference": "72a5c832d7a73038041df0c1ef823896360e059d",
+                "shasum": ""
+            },
+            "require": {
+                "beberlei/assert": "^2.7",
+                "daikon/data-structure": "master@dev",
+                "daikon/event-sourcing": "master@dev",
+                "daikon/message-bus": "master@dev",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.2",
+                "satooshi/php-coveralls": "master@dev",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Daikon\\ReadModel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MPL-2.0"
+            ],
+            "description": "Read-model components for Daikon projects.",
+            "homepage": "https://github.com/daikon-cqrs/read-model",
+            "keywords": [
+                "immutable",
+                "projection",
+                "read-model",
+                "repository"
+            ],
+            "time": "2017-07-24 15:53:36"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -336,6 +470,54 @@
             "time": "2017-03-20T17:10:46+00:00"
         },
         {
+            "name": "paragonie/random_compat",
+            "version": "v2.0.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/634bae8e911eefa89c1abfbf1b66da679ac8f54d",
+                "reference": "634bae8e911eefa89c1abfbf1b66da679ac8f54d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*|5.*"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/random.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "pseudorandom",
+                "random"
+            ],
+            "time": "2017-03-13T16:27:32+00:00"
+        },
+        {
             "name": "php-ds/php-ds",
             "version": "v1.1.1",
             "source": {
@@ -431,37 +613,119 @@
                 "response"
             ],
             "time": "2016-08-06T14:39:51+00:00"
+        },
+        {
+            "name": "ramsey/uuid",
+            "version": "3.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ramsey/uuid.git",
+                "reference": "4ae32dd9ab8860a4bbd750ad269cba7f06f7934e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/4ae32dd9ab8860a4bbd750ad269cba7f06f7934e",
+                "reference": "4ae32dd9ab8860a4bbd750ad269cba7f06f7934e",
+                "shasum": ""
+            },
+            "require": {
+                "paragonie/random_compat": "^1.0|^2.0",
+                "php": "^5.4 || ^7.0"
+            },
+            "replace": {
+                "rhumsaa/uuid": "self.version"
+            },
+            "require-dev": {
+                "apigen/apigen": "^4.1",
+                "codeception/aspect-mock": "^1.0 | ^2.0",
+                "doctrine/annotations": "~1.2.0",
+                "goaop/framework": "1.0.0-alpha.2 | ^1.0 | ^2.1",
+                "ircmaxell/random-lib": "^1.1",
+                "jakub-onderka/php-parallel-lint": "^0.9.0",
+                "mockery/mockery": "^0.9.4",
+                "moontoast/math": "^1.1",
+                "php-mock/php-mock-phpunit": "^0.3|^1.1",
+                "phpunit/phpunit": "^4.7|>=5.0 <5.4",
+                "satooshi/php-coveralls": "^0.6.1",
+                "squizlabs/php_codesniffer": "^2.3"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides the PECL libsodium extension for use with the SodiumRandomGenerator",
+                "ext-uuid": "Provides the PECL UUID extension for use with the PeclUuidTimeGenerator and PeclUuidRandomGenerator",
+                "ircmaxell/random-lib": "Provides RandomLib for use with the RandomLibAdapter",
+                "moontoast/math": "Provides support for converting UUID to 128-bit integer (in string form).",
+                "ramsey/uuid-console": "A console application for generating UUIDs with ramsey/uuid",
+                "ramsey/uuid-doctrine": "Allows the use of Ramsey\\Uuid\\Uuid as Doctrine field type."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ramsey\\Uuid\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marijn Huizendveld",
+                    "email": "marijn.huizendveld@gmail.com"
+                },
+                {
+                    "name": "Thibaud Fabre",
+                    "email": "thibaud@aztech.io"
+                },
+                {
+                    "name": "Ben Ramsey",
+                    "email": "ben@benramsey.com",
+                    "homepage": "https://benramsey.com"
+                }
+            ],
+            "description": "Formerly rhumsaa/uuid. A PHP 5.4+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
+            "homepage": "https://github.com/ramsey/uuid",
+            "keywords": [
+                "guid",
+                "identifier",
+                "uuid"
+            ],
+            "time": "2017-03-26T20:37:53+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "doctrine/instantiator",
-            "version": "1.0.5",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d"
+                "reference": "185b8868aa9bf7159f5f953ed5afb2d7fcdc3bda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/8e884e78f9f0eb1329e445619e04456e64d8051d",
-                "reference": "8e884e78f9f0eb1329e445619e04456e64d8051d",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/185b8868aa9bf7159f5f953ed5afb2d7fcdc3bda",
+                "reference": "185b8868aa9bf7159f5f953ed5afb2d7fcdc3bda",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3,<8.0-DEV"
+                "php": "^7.1"
             },
             "require-dev": {
                 "athletic/athletic": "~0.1.8",
                 "ext-pdo": "*",
                 "ext-phar": "*",
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "~2.0"
+                "phpunit/phpunit": "^6.2.3",
+                "squizlabs/php_codesniffer": "^3.0.2"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -486,7 +750,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2015-06-14T21:17:01+00:00"
+            "time": "2017-07-22T11:58:36+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1287,12 +1551,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/satooshi/php-coveralls.git",
-                "reference": "d7285decc88dff59c5ff02c4b1052ab424ba7fa5"
+                "reference": "a05a8113133a484351661c01a9dcf260ed1b79bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/satooshi/php-coveralls/zipball/d7285decc88dff59c5ff02c4b1052ab424ba7fa5",
-                "reference": "d7285decc88dff59c5ff02c4b1052ab424ba7fa5",
+                "url": "https://api.github.com/repos/satooshi/php-coveralls/zipball/a05a8113133a484351661c01a9dcf260ed1b79bb",
+                "reference": "a05a8113133a484351661c01a9dcf260ed1b79bb",
                 "shasum": ""
             },
             "require": {
@@ -1305,6 +1569,9 @@
                 "symfony/console": "^2.1 || ^3.0",
                 "symfony/stopwatch": "^2.0 || ^3.0",
                 "symfony/yaml": "^2.0 || ^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35 || ^5.4.3"
             },
             "suggest": {
                 "symfony/http-kernel": "Allows Symfony integration"
@@ -1342,7 +1609,7 @@
                 "github",
                 "test"
             ],
-            "time": "2017-03-31 10:12:47"
+            "time": "2017-07-31 23:15:59"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -1956,16 +2223,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v3.3.5",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "a094618deb9a3fe1c3cf500a796e167d0495a274"
+                "reference": "54ee12b0dd60f294132cabae6f5da9573d2e5297"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/a094618deb9a3fe1c3cf500a796e167d0495a274",
-                "reference": "a094618deb9a3fe1c3cf500a796e167d0495a274",
+                "url": "https://api.github.com/repos/symfony/config/zipball/54ee12b0dd60f294132cabae6f5da9573d2e5297",
+                "reference": "54ee12b0dd60f294132cabae6f5da9573d2e5297",
                 "shasum": ""
             },
             "require": {
@@ -2014,20 +2281,20 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-16T12:40:34+00:00"
+            "time": "2017-07-19T07:37:29+00:00"
         },
         {
             "name": "symfony/console",
-            "version": "v3.3.5",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "a97e45d98c59510f085fa05225a1acb74dfe0546"
+                "reference": "b0878233cb5c4391347e5495089c7af11b8e6201"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/a97e45d98c59510f085fa05225a1acb74dfe0546",
-                "reference": "a97e45d98c59510f085fa05225a1acb74dfe0546",
+                "url": "https://api.github.com/repos/symfony/console/zipball/b0878233cb5c4391347e5495089c7af11b8e6201",
+                "reference": "b0878233cb5c4391347e5495089c7af11b8e6201",
                 "shasum": ""
             },
             "require": {
@@ -2083,20 +2350,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-03T13:19:36+00:00"
+            "time": "2017-07-29T21:27:59+00:00"
         },
         {
             "name": "symfony/debug",
-            "version": "v3.3.5",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "63b85a968486d95ff9542228dc2e4247f16f9743"
+                "reference": "7c13ae8ce1e2adbbd574fc39de7be498e1284e13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/63b85a968486d95ff9542228dc2e4247f16f9743",
-                "reference": "63b85a968486d95ff9542228dc2e4247f16f9743",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/7c13ae8ce1e2adbbd574fc39de7be498e1284e13",
+                "reference": "7c13ae8ce1e2adbbd574fc39de7be498e1284e13",
                 "shasum": ""
             },
             "require": {
@@ -2139,11 +2406,11 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-07-05T13:02:37+00:00"
+            "time": "2017-07-28T15:27:31+00:00"
         },
         {
             "name": "symfony/filesystem",
-            "version": "v3.3.5",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -2251,7 +2518,7 @@
         },
         {
             "name": "symfony/stopwatch",
-            "version": "v3.3.5",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
@@ -2300,16 +2567,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.3.5",
+            "version": "v3.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "1f93a8d19b8241617f5074a123e282575b821df8"
+                "reference": "ddc23324e6cfe066f3dd34a37ff494fa80b617ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/1f93a8d19b8241617f5074a123e282575b821df8",
-                "reference": "1f93a8d19b8241617f5074a123e282575b821df8",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/ddc23324e6cfe066f3dd34a37ff494fa80b617ed",
+                "reference": "ddc23324e6cfe066f3dd34a37ff494fa80b617ed",
                 "shasum": ""
             },
             "require": {
@@ -2351,7 +2618,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-15T12:58:50+00:00"
+            "time": "2017-07-23T12:43:26+00:00"
         },
         {
             "name": "theseer/tokenizer",
