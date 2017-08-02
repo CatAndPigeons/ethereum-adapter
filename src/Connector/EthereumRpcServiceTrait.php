@@ -16,7 +16,7 @@ trait EthereumRpcServiceTrait
         return $this->call('eth_coinbase');
     }
 
-    private function getTransactionReceipt(string $txHash): array
+    private function getTransactionReceipt(string $txHash): ?array
     {
         return $this->call('eth_getTransactionReceipt', [$txHash]);
     }
