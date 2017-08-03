@@ -72,6 +72,8 @@ final class EthereumMigrationAdapter implements MigrationAdapterInterface
     private function getMigrationEvents(string $address): array
     {
         return $this->call('eth_getLogs', [[
+            'fromBlock' => '0x0',
+            'toBlock' => 'latest',
             'address' => $address,
             'topics'=> [
                 $this->getSha3('MigrationWasAdded(string)')
