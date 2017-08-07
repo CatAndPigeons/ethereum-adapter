@@ -16,5 +16,10 @@ interface EthereumServiceInterface
 
     public function sendEther(string $from, string $to, float $value): string;
 
+    public function getTransactionReceipt(string $txHash): ?array;
+
     public function transferToken(string $tokenContract, string $from, string $to, int $value): string;
+
+    public function approveTransfer(string $tokenContract, string $from, string $spender, int $value): string;
+
 }

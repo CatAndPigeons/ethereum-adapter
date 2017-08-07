@@ -31,14 +31,14 @@ trait EthereumRpcServiceTrait
         $this->call('personal_unlockAccount', [$address, $password, $duration]);
     }
 
+    public function getTransactionReceipt(string $txHash): ?array
+    {
+        return $this->call('eth_getTransactionReceipt', [$txHash]);
+    }
+
     private function getCoinbase(): string
     {
         return $this->call('eth_coinbase');
-    }
-
-    private function getTransactionReceipt(string $txHash): ?array
-    {
-        return $this->call('eth_getTransactionReceipt', [$txHash]);
     }
 
     private function getFunctionSignature(string $function): string

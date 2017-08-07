@@ -56,4 +56,17 @@ final class EthereumService implements EthereumServiceInterface
             'data' => $signature.$to.$value
         ]]);
     }
+
+    public function approveTransfer(string $tokenContract, string $from, string $spender, int $value): string
+    {
+        $signature = $this->getFunctionSignature('approve(address,uint256)');
+        $spender = str_pad(substr($spender, 2), 64, '0', STR_PAD_LEFT);
+        $value = str_pad(dechex($value), 64, '0', STR_PAD_LEFT);
+
+        return $this->call('eth_sendTransaction', [[
+            'from' => $from,
+            'to' => $tokenContract,
+            'data' => $signature.$spender.$value
+        ]]);
+    }
 }
