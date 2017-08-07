@@ -19,7 +19,8 @@ trait EthereumMigrationTrait
         $payload = [
             'from' => $from,
             'data' => '0x'.$contractByteCode.$offset.$length.$argument,
-            'gas' => '0x3d0900' //@todo proper gas estimation
+            'gas' => '0x47e7c4', //@todo proper gas estimation
+            'value' => '0x0'
         ];
         return $this->call('eth_sendTransaction', [$payload]);
     }
@@ -29,7 +30,7 @@ trait EthereumMigrationTrait
         $payload = [
             'from' => $from,
             'data' => '0x'.$contractByteCode,
-            'gas' => '0x3d0900',
+            'gas' => '0x47e7c4',
             'value' => '0x0' //required for empty constructor
         ];
         return $this->call('eth_sendTransaction', [$payload]);

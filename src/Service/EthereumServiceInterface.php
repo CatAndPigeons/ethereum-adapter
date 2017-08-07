@@ -4,6 +4,8 @@ namespace Daikon\Ethereum\Service;
 
 interface EthereumServiceInterface
 {
+    public function call(string $method, array $parameters = []);
+
     public function unlockAccount(string $address, string $password, int $duration = 30): void;
 
     public function createAccount(string $password): string;

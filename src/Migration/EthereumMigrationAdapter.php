@@ -90,7 +90,9 @@ final class EthereumMigrationAdapter implements MigrationAdapterInterface
         return $this->call('eth_sendTransaction', [[
             'from' => $this->settings['coinbase'],
             'to' => $address,
-            'data' => $signature.$offset.$length.$packed
+            'data' => $signature.$offset.$length.$packed,
+            'gas' => '0x47e7c4',
+            'value' => '0x0'
         ]]);
     }
 
