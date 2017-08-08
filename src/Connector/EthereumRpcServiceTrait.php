@@ -67,4 +67,20 @@ trait EthereumRpcServiceTrait
     {
         return pack('H*', $string);
     }
+
+    private function toWei(float $value)
+    {
+        return number_format($value*(10**18), 0, '.', '');
+    }
+
+    private function bcdechex(string $dec): string
+    {
+        $hex = '';
+        do {
+            $last = bcmod($dec, 16);
+            $hex = dechex($last).$hex;
+            $dec = bcdiv(bcsub($dec, $last), 16);
+        } while($dec > 0);
+        return $hex;
+    }
 }
