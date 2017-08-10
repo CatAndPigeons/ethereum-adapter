@@ -35,7 +35,7 @@ final class EthereumService implements EthereumServiceInterface
         ], 'latest']))/(10**18);
     }
 
-    public function sendEther(string $from, string $to, float $value): string
+    public function sendEther(string $from, string $to, float $value): array
     {
         return $this->call('eth_sendTransaction', [[
             'from' => $from,
@@ -44,7 +44,7 @@ final class EthereumService implements EthereumServiceInterface
         ]]);
     }
 
-    public function transferToken(string $tokenContract, string $from, string $to, float $value): string
+    public function transferToken(string $tokenContract, string $from, string $to, float $value): array
     {
         $signature = $this->getFunctionSignature('transfer(address,uint256)');
         $to = str_pad(substr($to, 2), 64, '0', STR_PAD_LEFT);
@@ -52,20 +52,21 @@ final class EthereumService implements EthereumServiceInterface
         return $this->call('eth_sendTransaction', [[
             'from' => $from,
             'to' => $tokenContract,
-            'data' => $signature.$to.$value
+            'data' => $signature.$to.$value,
+            'value' => '0x0'
         ]]);
     }
 
-    public function approveTransfer(string $tokenContract, string $from, string $spender, float $value): string
+    public function approveTransfer(string $tokenContract, string $from, string $spender, float $value): array
     {
         $signature = $this->getFunctionSignature('approve(address,uint256)');
         $spender = str_pad(substr($spender, 2), 64, '0', STR_PAD_LEFT);
         $value = str_pad($this->bcdechex($this->toWei($value)), 64, '0', STR_PAD_LEFT);
-
         return $this->call('eth_sendTransaction', [[
             'from' => $from,
             'to' => $tokenContract,
-            'data' => $signature.$spender.$value
+            'data' => $signature.$spender.$value,
+            'value' => '0x0'
         ]]);
     }
 }

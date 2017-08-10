@@ -11,7 +11,7 @@ trait EthereumMigrationTrait
 
     use EthereumRpcServiceTrait;
 
-    private function createMigrationsList(string $from, string $contractByteCode, string $namespace): string
+    private function createMigrationsList(string $from, string $contractByteCode, string $namespace): array
     {
         $offset = str_pad(dechex(32), 64, '0', STR_PAD_LEFT);
         $length = str_pad(dechex(strlen($namespace)), 64, '0', STR_PAD_LEFT);
@@ -25,7 +25,7 @@ trait EthereumMigrationTrait
         return $this->call('eth_sendTransaction', [$payload]);
     }
 
-    private function deployContract(string $from, string $contractByteCode): string
+    private function deployContract(string $from, string $contractByteCode): array
     {
         $payload = [
             'from' => $from,

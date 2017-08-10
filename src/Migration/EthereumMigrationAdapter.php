@@ -81,13 +81,13 @@ final class EthereumMigrationAdapter implements MigrationAdapterInterface
         ]]);
     }
 
-    private function addMigration(string $address, MigrationInterface $migration)
+    private function addMigration(string $address, MigrationInterface $migration): void
     {
         $signature = $this->getFunctionSignature('addMigration(string)');
         $offset = str_pad(dechex(32), 64, '0', STR_PAD_LEFT);
         $packed = $this->strhex(serialize($migration->toArray()));
         $length = str_pad(dechex(strlen($packed)), 64, '0', STR_PAD_LEFT);
-        return $this->call('eth_sendTransaction', [[
+        $txReceipt = $this->call('eth_sendTransaction', [[
             'from' => $this->settings['coinbase'],
             'to' => $address,
             'data' => $signature.$offset.$length.$packed,

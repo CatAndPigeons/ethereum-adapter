@@ -23,6 +23,26 @@ trait EthereumRpcServiceTrait
             throw new EthereumException(sprintf('Ethereum client error: %s', $rawResponse['error']['message']));
         }
 
+        if ($method === 'eth_sendTransaction') {
+            do {
+                /*
+                 * Handling concurrency is difficult with Ethereum/Geth. Sending transactions without waiting for
+                 * receipts is a recipe for losing your transactions, and nonces won't help you. This impl is not a
+                 * scalable solution but is suitable for the purposes of a single node demo. Nonces based on
+                 * transaction count could be used if you can be certain that getTransactionCount() is reliable, which
+                 * it may not be because of concurrency limitations, esp. under load.
+                 *
+                 * A scalable solution would be to mirror the asynchronous architecture of the web3 backend by
+                 * funneling all FE/BE events into a message queue for subsequent handling. The downside is that the
+                 * UI and web2 bridge really has to be eventually consistent but that's relatively easy to design
+                 * around CQRS/ES and a javascript/native UI.
+                 */
+                sleep(1);
+                $txReceipt = $this->getTransactionReceipt($rawResponse['result']);
+            } while (!$txReceipt);
+            return $txReceipt;
+        }
+
         return $rawResponse['result'];
     }
 
@@ -57,6 +77,8 @@ trait EthereumRpcServiceTrait
         return $this->call('eth_estimateGas', [$payload]);
     }
 
+    // Here be Dragons...
+
     private function strhex(string $string): string
     {
         $hexstr = unpack('H*', $string);
@@ -68,9 +90,10 @@ trait EthereumRpcServiceTrait
         return pack('H*', $string);
     }
 
-    private function toWei(float $value)
+    private function toWei(float $value, int $decimals = 18): string
     {
-        return number_format($value*(10**18), 0, '.', '');
+        $brokenNumber = explode('.', $value);
+        return number_format($brokenNumber[0]).''.str_pad($brokenNumber[1] ?? '0', $decimals, '0');
     }
 
     private function bcdechex(string $dec): string
